@@ -1,0 +1,55 @@
+# Pendências
+
+Itens marcados como **"A confirmar"** ou **"A definir"** na planilha de acompanhamento,
+mais pontos de alinhamento entre as abas. Marque as caixas conforme forem resolvidos.
+
+## Prioridades para a próxima entrega
+
+| Prioridade | Pendência | Critério para concluir |
+|---|---|---|
+| 1 | Registrar recursos reais de F1–F3 | URLs, versões, períodos e esquemas documentados |
+| 2 | Confirmar viabilidade dos indicadores | Vínculo aluno–turma, vagas, datas de conclusão e categorias verificados |
+| 3 | Validar um recorte completo | Coleta, integração e indicador com totais conferidos |
+| 4 | Medir e revisar a arquitetura | Prova de conceito e avaliação do ADR registradas |
+
+O [plano de validação](projeto/plano-de-validacao.md) detalha a ordem das entregas. Responsáveis e prazos permanecem a definir.
+
+## Dados
+
+- [ ] Volume estimado por dia/mês das fontes F1, F2 e F3 ([Fontes](dados/fontes.md))
+- [ ] Frequência de chegada da fonte F1 (alunos)
+- [ ] Retenção dos dados de alunos e de turmas
+- [ ] Tamanho estimado em 1 ano de cada conjunto de dados ([Formatos](dados/formatos.md))
+- [ ] Volume estimado em 1 ano de cada armazenamento ([Cargas e engines](dados/cargas-e-engines.md))
+
+## Modelo e indicadores
+
+- [ ] Comprovar a fonte de Matrícula e a relação aluno–turma
+- [ ] Confirmar disponibilidade de vagas, solicitações, datas de conclusão e pré-requisitos
+- [ ] Validar a chave de Oferta de Disciplina considerando o turno
+- [ ] Definir curso/matriz e obrigatoriedade dos componentes
+- [ ] Definir coortes, data de corte, situações válidas e denominadores de Q1–Q8 ([Indicadores](projeto/indicadores.md))
+- [ ] Revisar as classificações OLTP/OLAP e ETL/ELT a partir da implementação
+
+## LGPD
+
+- [ ] Definir a base legal para os dados de alunos (F1) e de turmas (F2)
+- [ ] Confirmar se os datasets públicos já vêm anonimizados (sexo, raça/cor e data de nascimento)
+- [ ] Confirmar se `matrícula` como chave de Aluno é o identificador real ou um código anonimizado
+
+## Pipeline e responsáveis
+
+- [ ] Definir o responsável de cada etapa P1–P8 ([Etapas](pipeline/etapas.md))
+- [ ] Registrar os riscos na planilha (a aba mencionada no resumo está ausente) e revisar [Riscos](pipeline/riscos.md)
+
+## Decisão (ADR-001)
+
+- [ ] Executar a prova de conceito PostgreSQL + Parquet com dados reais
+- [ ] Registrar tempos de consulta e volume de armazenamento (CSV × Parquet)
+- [ ] Avaliar as evidências com a equipe e registrar a decisão de aceitar ou revisar o ADR
+
+## Pontos a alinhar entre as abas
+
+- [ ] **Camada analítica:** a planilha descreve a base analítica como PostgreSQL orientado a linha (aba 4) e também como Parquet (abas 2, 5 e ADR). Definir quais consultas rodam no PostgreSQL e quais leem Parquet.
+- [ ] **Dados brutos:** a aba 4 guarda os brutos em sistema de arquivos; o ADR fala em brutos em Parquet. Definir se os brutos ficam no formato original (CSV/JSON) ou convertidos.
+- [ ] **Tabela de consultas** da aba 3 (Modelos): só tem o exemplo; transferir as consultas do ADR para lá.

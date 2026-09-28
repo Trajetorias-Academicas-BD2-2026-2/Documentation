@@ -1,0 +1,78 @@
+# Fontes de dados
+
+O projeto usa **três fontes externas**, todas provenientes do Portal de Dados Abertos da UnB
+(originadas no SIGAA). Nenhuma é gerada por usuários do sistema.
+
+!!! note "Inventário declarado na planilha"
+    As características abaixo reproduzem o planejamento da equipe. URLs específicas dos recursos, períodos cobertos, esquemas reais e tamanhos ainda não estão registrados. Vazão, pureza e previsibilidade são classificações da planilha, sem medições anexadas.
+
+## Resumo
+
+| ID | Fonte | Tipo | Formato | Frequência | Vazão | Pureza | Previsibilidade | Dado pessoal? |
+|---|---|---|---|---|---|---|---|---|
+| F1 | Dados de alunos (SIGAA) | Sistema | CSV | Eventual / atualização periódica | Média | Média | Alta | Sim |
+| F2 | Turmas | Sistema | CSV | Semestral / eventual | Média | Alta | Alta | A confirmar |
+| F3 | Componente curricular | Sistema | CSV / JSON | Eventual / atualização periódica | Média | Alta | Alta | Não, se usados só dados curriculares |
+
+!!! tip "Como ler as colunas"
+    - **Vazão**: quantidade de dado que chega por unidade de tempo.
+    - **Pureza**: o quanto o dado chega limpo (sem duplicidade, nulos ou erros).
+    - **Previsibilidade**: o quanto o formato/esquema se mantém estável entre entregas.
+
+## F1 — Dados de alunos (SIGAA)
+
+| Item | Descrição |
+|---|---|
+| **Quem gera** | UnB / SIGAA |
+| **Conteúdo** | Histórico acadêmico, forma de ingresso (PAS, Enem, Cotas), status (concluído/cancelado), turno, sexo, raça/cor, data de nascimento e de ingresso |
+| **Formato** | CSV |
+| **Volume estimado** | A confirmar |
+| **Retenção** | A confirmar |
+| **Base legal (LGPD)** | A confirmar |
+| **O que quebra se falhar** | Impossibilita analisar o tempo médio de formação, o perfil sociodemográfico, o impacto de cotas/ingresso e as taxas de evasão e conclusão |
+
+!!! warning "Atenção à LGPD"
+    Esta fonte contém atributos como **sexo, raça/cor e data de nascimento**. Raça/cor é
+    classificada como dado pessoal sensível pela LGPD (art. 5º, II). A base legal e a forma
+    de tratamento (por exemplo, confirmar se o dataset público já vem anonimizado)
+    ainda precisam ser definidas — veja as [Pendências](../pendencias.md).
+
+## F2 — Turmas
+
+| Item | Descrição |
+|---|---|
+| **Quem gera** | UnB / SIGAA |
+| **Conteúdo** | Relação de turmas da instituição, permitindo analisar a oferta de disciplinas por período |
+| **Formato** | CSV |
+| **Volume estimado** | A confirmar |
+| **Frequência** | Semestral / eventual |
+| **Retenção** | A confirmar |
+| **Base legal (LGPD)** | A confirmar |
+| **O que quebra se falhar** | Não será possível analisar quais disciplinas são ofertadas, quantas turmas são abertas e como a oferta varia ao longo dos períodos |
+
+## F3 — Componente curricular
+
+| Item | Descrição |
+|---|---|
+| **Quem gera** | UnB / SIGAA |
+| **Conteúdo** | Relação dos componentes curriculares dos cursos da UnB, com as informações necessárias para identificar e relacionar as disciplinas |
+| **Formato** | CSV / JSON |
+| **Volume estimado** | A confirmar |
+| **Frequência** | Eventual / atualização periódica |
+| **Retenção** | Enquanto necessário ao projeto |
+| **Base legal (LGPD)** | Não se aplica |
+| **O que quebra se falhar** | Não será possível relacionar corretamente as turmas às disciplinas nem analisar a estrutura curricular |
+
+!!! note "Dado comportamental também conta"
+    Dado emitido por um sistema, mas que descreve uma pessoa (cliques, tempo de uso,
+    trajeto), é considerado dado de usuário para efeito de LGPD.
+
+## Evidências a coletar
+
+| Fonte | Recurso e período | Verificação prioritária |
+|---|---|---|
+| F1 · Alunos | URL e cobertura temporal a registrar | Confirmar granularidade do vínculo, datas de ingresso/conclusão e existência de relação aluno–turma |
+| F2 · Turmas | URL e cobertura temporal a registrar | Confirmar identificador único, vagas, turno, situação e chave do componente |
+| F3 · Componentes | URL e cobertura temporal a registrar | Confirmar código, pré-requisitos e vínculo com a matriz de cada curso |
+
+A presença de uma entidade no modelo não comprova que seus campos estejam disponíveis nas fontes. Confira as [dependências dos indicadores](../projeto/indicadores.md#dependencias-que-precisam-ser-confirmadas) antes de definir as consultas finais.
